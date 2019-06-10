@@ -19,10 +19,14 @@ export default class WeatherDetailScreen extends React.Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    // const city = navigation.getParam('city', null);
-    const city = 'Daejeon';
+    const city = navigation.getParam('city', null);
+    // const city = 'Daejeon';
+    // console.log(city);
 
-    fetch(`http://demo6468405.mockable.io/weather-crawlers/current-weathers/by-city-name/${city}`)
+    // ( 아이피 주소로 링크를 만들어야 함니당 ) -> 링크에 아이피주소 따올 수 있는 방법을 나중에 찾아보죠
+    const cityuri = `http://192.168.0.143:8080/weather-crawler/current-weathers/by-city-name/${city}`
+    // console.log(cityuri)
+    fetch(cityuri)
       .then(response => response.json())
       .then(info => {
         this.setState({
