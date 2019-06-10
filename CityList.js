@@ -15,6 +15,11 @@ export default class CityList extends React.Component {
     };
   }
 
+
+// http://localhost:8080/weather-crawler/current-weathers/by-city-name
+// http://localhost:8080/weather-crawler/available-cities
+// http://demo6468405.mockable.io/weather-crawlers/cities
+
   componentDidMount() {
     fetch('http://demo6468405.mockable.io/weather-crawlers/cities')
       .then(response => response.json())
