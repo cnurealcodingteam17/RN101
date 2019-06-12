@@ -24,7 +24,7 @@ export default class WeatherDetailScreen extends React.Component {
     // console.log(city);
 
     // ( 아이피 주소로 링크를 만들어야 함니당 ) -> 링크에 아이피주소 따올 수 있는 방법을 나중에 찾아보죠
-    const cityuri = `http://192.168.0.143:8080/weather-crawler/current-weathers/by-city-name/${city}`
+    const cityuri = `http://192.168.1.163:8080/weather-crawler/current-weathers/by-city-name/${city}`
     // console.log(cityuri)
     fetch(cityuri)
       .then(response => response.json())
@@ -45,11 +45,17 @@ export default class WeatherDetailScreen extends React.Component {
       )
     }
 
+    let weatherMain = this.state.weather[0].main;
     let celsius = this.state.main.temp - 273.15;
+    let yuna = this.state.wind.speed;
+
 
     return (
       <View style={styles.container}>
-        <Text>온도: {celsius.toFixed(1)}</Text>
+        <Text> { weatherMain }</Text>
+        <Text>온도: {celsius.toFixed(1)} ℃</Text>
+        <Text>바람: {yuna.toFixed(1)} m/s</Text>
+
       </View>
     );
   }
