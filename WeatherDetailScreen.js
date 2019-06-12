@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
+import Icon from './Icon';
 
 export default class WeatherDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -48,14 +49,18 @@ export default class WeatherDetailScreen extends React.Component {
     let weatherMain = this.state.weather[0].main;
     let celsius = this.state.main.temp - 273.15;
     let yuna = this.state.wind.speed;
+    let iconId = this.state.weather[0].icon;
 
+//console.log(iconId);
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         <Text> { weatherMain }</Text>
         <Text>온도: {celsius.toFixed(1)} ℃</Text>
         <Text>바람: {yuna.toFixed(1)} m/s</Text>
-
+<div className="weather-image">
+        <Icon iconId = {iconId} />
+</div>
       </View>
     );
   }
@@ -66,5 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: Constants.statusBarHeight,
+     alignItems:'center',
   },
 });
