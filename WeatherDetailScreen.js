@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Constants } from 'expo';
-import Icon from './Icon';
+
+
+
 
 export default class WeatherDetailScreen extends React.Component {
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: `Weather Info: ${navigation.getParam('city', 'Unknown')}`,
@@ -51,20 +54,37 @@ export default class WeatherDetailScreen extends React.Component {
     let yuna = this.state.wind.speed;
     let iconId = this.state.weather[0].icon;
 
+  // const iconW = `http://openweathermap.org/img/w/${iconId}.png`
+  // // console.log(cityuri)
+  // fetch(iconW)
+  //   .then(response => response.json())
+  //   .then(json => {
+  //
+  //   });
 //console.log(iconId);
-
+      // <Icon  IconId = {iconId} />
     return (
+
       <View style={styles.container} >
-        <Text> { weatherMain }</Text>
-        <Text>온도: {celsius.toFixed(1)} ℃</Text>
-        <Text>바람: {yuna.toFixed(1)} m/s</Text>
-<div className="weather-image">
-        <Icon iconId = {iconId} />
-</div>
-      </View>
+
+            <View style={styles.upper}>
+            <Image
+            style ={{width: 150, height: 150}}
+            source = {{uri: `http://openweathermap.org/img/w/${iconId}.png`}}
+            />
+            <Text style={styles.font1}> { weatherMain }</Text>
+            <Text>온도: {celsius.toFixed(1)} ℃</Text>
+            <Text>바람: {yuna.toFixed(1)} m/s</Text>
+            </View>
+
+
+
+      </View >
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -72,5 +92,39 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: Constants.statusBarHeight,
      alignItems:'center',
+  },
+  upper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent"
+},
+temp: {
+    fontSize: 48,
+    backgroundColor: "transparent",
+    color: "black",
+    marginTop: 10
+},
+lower: {
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
+    paddingLeft: 25
+},
+title: {
+    fontSize: 38,
+    backgroundColor: "transparent",
+    color: "black",
+    marginBottom: 10,
+    fontWeight: "300"
+},
+subtitle: {
+    fontSize: 24,
+    backgroundColor: "transparent",
+    color: "black",
+    marginBottom: 24
+},
+  font1: {
+        fontSize: 35
   },
 });
