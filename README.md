@@ -7,7 +7,7 @@ Example for React Native 101 class. Each commit represents each step.
 ### Clone the repository
 
 ```bash
-$ git clone https://github.com/cwdoh/RN101-class.git
+$ git clone https://github.com/cnurealcodingteam17/RN101.git
 ```
 
 ### Install whole dependencies
