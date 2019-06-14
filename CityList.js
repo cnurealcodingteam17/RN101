@@ -4,7 +4,9 @@ import { Constants } from 'expo';
 
 export default class CityList extends React.Component {
   static navigationOptions = {
-    title: 'Cities',
+    marginLeft: 400,
+    title: 'Choose Your Cities!'
+
   };
 
   constructor(props) {
@@ -62,20 +64,25 @@ export default class CityList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
+  //  textAlign: 'center',
+  //  backgroundColor: '#BDBDBD',
+  //  marginTop: Constants.statusBarHeight,
   },
 
   item: {
     flex: 1,
     height: 50,
     justifyContent: 'center',
-
+    marginLeft: 5,
+    marginRight: 5,
     borderWidth: 1,
-    borderColor: 'orange',
+    borderColor: '#000000',
+    backgroundColor: '#D5D5D5',
   },
+
   text: {
     fontSize: 20,
     textAlign: 'center',
   }
+
 });
