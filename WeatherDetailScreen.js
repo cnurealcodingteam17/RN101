@@ -2,14 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Constants } from 'expo';
 
-
-
-
 export default class WeatherDetailScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `Weather Info: ${navigation.getParam('city', 'Unknown')}`,
+      title: `< ${navigation.getParam('city', 'Unknown')} > ' s Weather!`,
     };
   };
 
@@ -27,8 +24,8 @@ export default class WeatherDetailScreen extends React.Component {
     // const city = 'Daejeon';
 
 
-    // ( 아이피 주소로 링크를 만들어야 함니당 ) -> 링크에 아이피주소 따올 수 있는 방법을 나중에 찾아보죠
-    const cityuri = `http://192.168.1.150:8080/weather-crawler/current-weathers/by-city-name/${city}`
+    // ( 아이피 주소로 링크를 만들어야 합니다! ) -> 링크에 아이피주소 따올 수 있는 방법을 나중에 찾아보죠
+    const cityuri = `http://192.168.1.196:8088/weather-crawler/current-weathers/by-city-name/${city}`
 
     fetch(cityuri)
       .then(response => response.json())
@@ -44,7 +41,7 @@ export default class WeatherDetailScreen extends React.Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.container}>
-          <Text>데이터를 불러오는 중입니다.</Text>
+          <Text style = {styles.dataloading}> Data is loading ... </Text>
         </View>
       )
     }
@@ -53,7 +50,8 @@ export default class WeatherDetailScreen extends React.Component {
     let celsius = this.state.main.temp - 273.15;
     let wind_speed = this.state.wind.speed;
     let iconId = this.state.weather[0].icon;
-
+    let H_temp = this.state.main.temp_max-273.15;
+    let L_temp = this.state.main.temp_min-273.15;
 
     return (
       <View style={styles.container} >
@@ -64,16 +62,16 @@ export default class WeatherDetailScreen extends React.Component {
               source = {{uri: `http://openweathermap.org/img/w/${iconId}.png`}}
             />
             <Text style={styles.weather}> { weatherMain } </Text>
-            <Text style={styles.temp}> 온도: {celsius.toFixed(1)} ℃ </Text>
-            <Text style={styles.wind}>바람: {wind_speed.toFixed(1)} m/s </Text>
+            <Text style={styles.temp}>온도 : {celsius.toFixed(1)} ℃ </Text>
+            <Text style={styles.wind}>바람 : {wind_speed.toFixed(1)} m/s </Text>
+            <Text style={styles.Htemp}> 최고기온 : {H_temp.toFixed(1)} ℃ </Text>
+            <Text style={styles.Ltemp}> 최저기온 : {L_temp.toFixed(1)} ℃ </Text>
             </View>
 
       </View >
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -109,8 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     color: "black",
     marginBottom: 10,
-    fontWeight: "300"
-  },
+    fontWeight: "300",
+    },
   subtitle: {
     fontSize: 24,
     backgroundColor: "transparent",
@@ -118,10 +116,26 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
   weather: {
-    fontSize: 35
+    fontSize: 20,
+    marginTop : 5
   },
   wind:{
     fontSize: 20,
     marginTop: 10
+  },
+  Htemp:{
+    fontSize: 15,
+    color: "#FF6C66",
+    marginTop: 15
+  },
+  Ltemp:{
+    fontSize: 15,
+    color:"#5AAEFF",
+  //  marginTop: 22
+  },
+  dataloading:{
+    marginTop:250,
+    fontSize : 20,
+    color: '#BDBDBD',
   }
 });
