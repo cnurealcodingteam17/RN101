@@ -52,6 +52,7 @@ export default class WeatherDetailScreen extends React.Component {
     let iconId = this.state.weather[0].icon;
     let H_temp = this.state.main.temp_max-273.15;
     let L_temp = this.state.main.temp_min-273.15;
+    let humidityMain = this.state.main.humidity;
 
     return (
       <View style={styles.container} >
@@ -64,8 +65,10 @@ export default class WeatherDetailScreen extends React.Component {
             <Text style={styles.weather}> { weatherMain } </Text>
             <Text style={styles.temp}>온도 : {celsius.toFixed(1)} ℃ </Text>
             <Text style={styles.wind}>바람 : {wind_speed.toFixed(1)} m/s </Text>
+            <Text style={styles.humi}> 습도 : {humidityMain.toFixed(1)}% </Text>
             <Text style={styles.Htemp}> 최고기온 : {H_temp.toFixed(1)} ℃ </Text>
             <Text style={styles.Ltemp}> 최저기온 : {L_temp.toFixed(1)} ℃ </Text>
+
             </View>
 
       </View >
@@ -123,10 +126,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10
   },
+  humi:{
+    fontSize: 20,
+    color: "black",
+    marginTop: 15
+  },
   Htemp:{
     fontSize: 15,
     color: "#FF6C66",
-    marginTop: 15
+    marginTop: 20
   },
   Ltemp:{
     fontSize: 15,
